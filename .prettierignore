@@ -1,0 +1,9 @@
+node_modules
+build
+dist
+.next
+coverage
+*.log
+**/*.min.*
+**/.turbo/**
+**/.cache/**
