@@ -1,10 +1,9 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import { container } from 'webpack';
-const { ModuleFederationPlugin } = container;
+import webpack from 'webpack';
 
 export default {
   mode: 'development',
-  entry: './src/index.js',
+  entry: './src/index.tsx',
   output: {
     publicPath: 'http://localhost:3002/',
   },
@@ -13,12 +12,17 @@ export default {
     historyApiFallback: true,
   },
   plugins: [
-    new ModuleFederationPlugin({
+    new webpack.container.ModuleFederationPlugin({
       name: 'chat',
       library: { type: 'var', name: 'chat' },
       filename: 'remoteEntry.js',
       exposes: {
-        './Chat': './src/Chat.js',
+        './Chat': './src/ChatApp.tsx',
+      },
+      shared: {
+        react: { singleton: true, requiredVersion: false },
+        'react-dom': { singleton: true, requiredVersion: false },
+        'react/jsx-runtime': { singleton: true, requiredVersion: false },
       },
     }),
     new HtmlWebpackPlugin({
@@ -28,15 +32,13 @@ export default {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.tsx?$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
-          },
-        },
+        use: 'ts-loader',
       },
     ],
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
   },
 };
