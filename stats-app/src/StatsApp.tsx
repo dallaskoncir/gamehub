@@ -5,12 +5,30 @@ const StatsApp: React.FC = () => {
   const [score, setScore] = React.useState<number>(0);
 
   return (
-    <div style={{ border: '1px solid #ccc', padding: 12 }}>
-      <h3>Stats</h3>
-      <div>Level: {level}</div>
-      <div>Score: {score}</div>
-      <button onClick={() => setLevel(level + 1)} style={{ marginRight: 8 }}>Level Up</button>
-      <button onClick={() => setScore(score + 10)}>Add 10 Points</button>
+    <div className="border border-gray-300 p-3 rounded-lg bg-white">
+      <h3 className="text-lg font-semibold mb-3">Stats</h3>
+      <div className="space-y-2 mb-4">
+        <div className="text-sm">
+          <span className="font-medium">Level:</span> {level}
+        </div>
+        <div className="text-sm">
+          <span className="font-medium">Score:</span> {score}
+        </div>
+      </div>
+      <div className="flex gap-2">
+        <button
+          onClick={() => setLevel(level + 1)}
+          className="px-3 py-2 bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500"
+        >
+          Level Up
+        </button>
+        <button
+          onClick={() => setScore(score + 10)}
+          className="px-3 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
+        >
+          Add 10 Points
+        </button>
+      </div>
     </div>
   );
 };

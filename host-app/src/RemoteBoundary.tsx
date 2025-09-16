@@ -23,7 +23,7 @@ export default class RemoteBoundary extends React.Component<RemoteBoundaryProps,
 
   render() {
     if (this.state.hasError) {
-      return this.props.fallback ?? <div style={{ border: '1px dashed #ccc', padding: 12 }}>Module unavailable</div>;
+      return this.props.fallback ?? <div className="border border-dashed border-gray-300 p-3 rounded">Module unavailable</div>;
     }
     return this.props.children;
   }
